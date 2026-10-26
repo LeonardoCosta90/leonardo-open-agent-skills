@@ -1,5 +1,7 @@
 # Leonardo's Open Agent Skills
 
+[Leia em português (Brasil)](README.pt-BR.md)
+
 Reusable skills for AI coding agents, maintained as portable `SKILL.md` files. The skills are intended to work across projects; when a skill is relevant, use it together with applicable Superpowers skills rather than treating either as a replacement for the other.
 
 ## Skills

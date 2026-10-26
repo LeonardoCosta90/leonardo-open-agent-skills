@@ -1,5 +1,7 @@
 # Contributing
 
+[Leia em português (Brasil)](CONTRIBUTING.pt-BR.md)
+
 ## Adding or updating a skill
 
 1. Create `skills/<skill-name>/SKILL.md` using a lowercase, hyphenated directory name.
