@@ -1,83 +1,83 @@
 ---
 name: documenting-evidence-based-issues
-description: Use when investigating or reporting a defect, especially when evidence is partial or a bug report needs diagnosis, reproduction steps, suggested correction, or acceptance criteria.
+description: Use quando investigar ou relatar um defeito, especialmente com evidências incompletas ou quando o bug report precisar de diagnóstico, passos de reprodução, sugestão de correção ou critérios de aceite.
 ---
 
-# Documenting Evidence-Based Issues
+# Documentação de issues baseada em evidências
 
-## Purpose
+## Objetivo
 
-Produce bug reports that are useful to engineering without turning assumptions into facts. Separate what was observed, what code inspection establishes, and what remains a hypothesis. Preserve uncertainty and avoid overstating security, scope, or test coverage.
+Produza relatos de bugs úteis para engenharia sem transformar suposições em fatos. Separe o que foi observado, o que a inspeção do código confirma e o que continua sendo hipótese. Preserve as incertezas e evite exagerar conclusões sobre segurança, escopo ou cobertura de testes.
 
-## Work with Superpowers
+## Trabalhe em conjunto com Superpowers
 
-Use this skill together with applicable Superpowers skills; it is not a substitute for them. Use `systematic-debugging` when investigating a technical defect, and `verification-before-completion` before claiming an issue was created, evidence verified, or a report is complete. Use `brainstorming` if the task expands into designing new behavior or a broader solution. Do not invoke implementation skills when the request is only to diagnose or report.
+Use esta skill junto com as skills pertinentes do Superpowers; ela não as substitui. Use `systematic-debugging` ao investigar um defeito técnico e `verification-before-completion` antes de afirmar que uma issue foi aberta, que uma evidência foi verificada ou que o relato está concluído. Use `brainstorming` se a tarefa se expandir para projetar comportamento novo ou uma solução mais ampla. Não invoque skills de implementação quando o pedido for apenas diagnosticar ou relatar.
 
-## Workflow
+## Fluxo de trabalho
 
-1. **Capture the report context.** Record the environment/build if known, actor/role and tenant or scope if relevant, operation performed, observed result, and user impact. Never include credentials, tokens, real patient data, or other secrets.
-2. **Separate evidence from interpretation.** Identify which facts come from user testimony, screenshots, API responses, logs, automated tests, or local source inspection. Do not imply that a screenshot proves persistence, authorization behavior, or backend state unless it actually shows that.
-3. **Reproduce safely when authorized and feasible.** Follow the user's scope. Do not make production writes, alter data, or test outside the requested environment. If not reproduced, say so explicitly.
-4. **Investigate before asserting root cause.** Trace the relevant UI, API, and persistence paths as needed. Cite repository-relative file paths and line ranges where available. Distinguish confirmed code behavior from the deployed build; local code does not prove which code is running in STG/production.
-5. **Classify the finding narrowly.** Distinguish UI/message defects, functional defects, data-integrity defects, and authorization/security defects. A suspicious symptom is not proof of a security incident. State what the evidence does and does not demonstrate.
-6. **Write an actionable report.** Include concise reproduction steps, expected and actual behavior, evidence, diagnosis (or explicitly say root cause is unconfirmed), a proposed direction rather than an unrequested implementation, and testable acceptance criteria.
-7. **State boundaries.** Mention untested cases, missing build/request/log/database evidence, and whether code or data was changed. Never mark a test passed based only on assumptions.
-8. **Check for duplicates and publish only when requested.** Search the relevant repository's open and closed issues. If creating an issue was not requested, prepare a draft rather than publishing. Do not modify application code when the request is only to report a bug.
+1. **Registre o contexto do relato.** Anote ambiente/build, ator/perfil e tenant/escopo se conhecidos e pertinentes, operação executada e impacto observado. Nunca inclua credenciais, tokens, dados reais de pacientes ou outros segredos.
+2. **Separe evidência de interpretação.** Identifique o que vem de relato do usuário, captura de tela, resposta da API, logs, testes automatizados ou inspeção local do código. Não sugira que uma captura prova persistência, autorização ou estado do backend se ela não demonstra isso.
+3. **Reproduza com segurança quando autorizado e viável.** Respeite o escopo do usuário. Não faça gravações em produção, altere dados nem teste fora do ambiente solicitado. Se não houver reprodução, diga isso explicitamente.
+4. **Investigue antes de afirmar causa-raiz.** Rastreie os caminhos relevantes da interface, API e persistência conforme necessário. Cite caminhos relativos do repositório e linhas quando disponíveis. Diferencie o comportamento confirmado no código local da versão implantada: o código local não prova qual versão está em STG/produção.
+5. **Classifique o achado com precisão.** Diferencie falha de interface/mensagem, funcionalidade, integridade de dados e autorização/segurança. Um sintoma suspeito não comprova incidente de segurança. Declare o que as evidências demonstram e o que não demonstram.
+6. **Escreva um relato acionável.** Inclua passos concisos de reprodução, comportamento esperado e observado, evidências, diagnóstico (ou declare que a causa não foi confirmada), direção sugerida sem implementar algo não solicitado e critérios de aceite testáveis.
+7. **Declare os limites.** Informe cenários não testados, ausência de build/request/logs/banco e se código ou dados foram alterados. Nunca marque teste como aprovado com base em suposição.
+8. **Verifique duplicatas e publique somente quando solicitado.** Pesquise issues abertas e fechadas no repositório relevante. Se a criação não foi solicitada, prepare um rascunho em vez de publicar. Não altere código do produto quando o pedido for somente relatar o bug.
 
-## Evidence language
+## Linguagem para evidências
 
-Prefer explicit labels:
+Use rótulos explícitos quando ajudarem:
 
-- **Observed:** directly visible or returned in the provided/tested evidence.
-- **Confirmed by code inspection:** behavior present in the inspected local source; deployed version may differ.
-- **Reported by user:** information the user supplied but that was not independently verified.
-- **Hypothesis / risk to investigate:** plausible implication not yet reproduced or proven.
-- **Not tested / unknown:** required evidence or scenario is absent.
+- **Observado:** diretamente visível ou retornado na evidência fornecida/coletada.
+- **Confirmado por inspeção do código:** comportamento presente no código local examinado; a versão implantada pode ser diferente.
+- **Relatado pelo usuário:** informação fornecida, mas não verificada independentemente.
+- **Hipótese / risco a investigar:** implicação plausível ainda não reproduzida ou comprovada.
+- **Não testado / desconhecido:** evidência ou cenário necessário está ausente.
 
-Use calibrated conclusions: “is consistent with,” “suggests,” or “was not demonstrated” when evidence is incomplete. Reserve “confirmed cause,” “data leak,” and “reproduced” for cases with supporting evidence.
+Prefira conclusões calibradas como “é compatível com”, “sugere” ou “não foi demonstrado” quando a evidência for incompleta. Use “causa confirmada”, “vazamento de dados” e “reproduzido” somente com evidências que sustentem essas afirmações.
 
-## Suggested issue structure
+## Estrutura sugerida para a issue
 
 ```markdown
 ## Problema
-<Observed behavior and impact; avoid speculative cause.>
+<Comportamento observado e impacto; sem causa especulativa.>
 
 ## Reprodução
-1. <Minimal, safe, deterministic steps>
+1. <Passos mínimos, seguros e determinísticos>
 
 ## Evidência
-<Source of evidence, sanitized response/logs, environment/build if known.>
-<State what the evidence does not establish.>
+<Origem da evidência, resposta/logs sanitizados e ambiente/build se conhecidos.>
+<Declare o que a evidência não comprova.>
 
-## Diagnóstico no código (if inspected)
-- <path:line-range — confirmed local behavior>
-- <Separate deployment/version uncertainty and unconfirmed hypotheses.>
+## Diagnóstico no código (se inspecionado)
+- <caminho:linhas — comportamento local confirmado>
+- <Incerteza sobre implantação e hipóteses ainda não confirmadas.>
 
 ## Esperado
-- <User-visible and system behavior>
+- <Comportamento visível para o usuário e para o sistema>
 
-## Sugestão de correção (optional)
-1. <Direction that preserves security/data integrity; do not prescribe an unverified root-cause fix.>
+## Sugestão de correção (opcional)
+1. <Direção que preserve segurança/integridade; não prescreva uma correção para causa não confirmada.>
 
 ## Critérios de aceite
-- [ ] <Observable, testable outcomes, including relevant regressions and edge cases>
+- [ ] <Resultados observáveis e testáveis, incluindo regressões/casos de borda pertinentes>
 
 ## Limites
-<Not reproduced, build/request/log/database unknown, scenarios not tested, and whether code/data changed.>
+<Não reproduzido, build/request/log/banco desconhecidos, cenários não testados e alterações de código/dados.>
 ```
 
-Adapt or omit sections when they do not apply. Keep the issue proportional to the defect; do not pad it with generic criteria.
+Adapte ou omita seções que não se aplicam. Mantenha a issue proporcional ao defeito; não acrescente critérios genéricos apenas para preencher espaço.
 
-## Safety and rigor checks
+## Verificações de segurança e rigor
 
-Before publishing, verify:
+Antes de publicar, confira:
 
-- Does every factual claim have a stated source?
-- Are user-reported behavior, direct evidence, source inspection, and hypotheses clearly distinguished?
-- Could a 404, empty list, or generic error have multiple explanations? Do not collapse them into one without evidence.
-- Does the report avoid claiming authorization failure or data exposure unless unauthorized data access is demonstrated?
-- Are acceptance criteria testable and do they cover the security boundary without prescribing insecure shortcuts?
-- Are privacy-sensitive examples synthetic and sanitized?
-- Is the issue scoped to the user's request, with no fix implemented unless separately requested?
+- Toda afirmação factual informa sua fonte?
+- Relatos do usuário, evidência direta, inspeção do código e hipóteses estão claramente separados?
+- Um 404, lista vazia ou erro genérico pode ter mais de uma explicação? Não reduza as alternativas sem evidência.
+- O relato evita afirmar falha de autorização ou exposição de dados sem demonstrar acesso não autorizado?
+- Os critérios de aceite são testáveis e cobrem o limite de segurança sem sugerir atalhos inseguros?
+- Exemplos sensíveis usam dados sintéticos e sanitizados?
+- A issue está dentro do pedido, sem implementar uma correção não solicitada?
 
-If a root cause is unknown, title and describe the issue by its observed symptom, and label diagnosis as unconfirmed rather than inventing certainty.
+Se a causa-raiz for desconhecida, intitule e descreva a issue pelo sintoma observado e identifique o diagnóstico como não confirmado.
