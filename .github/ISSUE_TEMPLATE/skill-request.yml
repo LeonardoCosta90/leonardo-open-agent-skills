@@ -1,0 +1,33 @@
+name: Skill request
+description: Propose a new reusable agent skill or an improvement to an existing one
+title: "[Skill] "
+labels: ["skill"]
+body:
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use case
+      description: What recurring task or problem should this skill help with?
+    validations:
+      required: true
+  - type: textarea
+    id: trigger
+    attributes:
+      label: When should the skill be used?
+      description: Describe concrete user requests, symptoms, or situations that should trigger it.
+    validations:
+      required: true
+  - type: textarea
+    id: expected-guidance
+    attributes:
+      label: Expected guidance
+      description: What should an agent reliably do, and what should it avoid?
+    validations:
+      required: true
+  - type: textarea
+    id: scenarios
+    attributes:
+      label: Validation scenarios
+      description: Give realistic examples, including missing information or edge cases.
+    validations:
+      required: false
